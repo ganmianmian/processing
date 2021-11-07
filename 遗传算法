@@ -1,0 +1,92 @@
+
+float CHECK_SIZE = 10.0;
+int CHECK_WIDTH = 50;
+
+int CHECKS_SIZE = 20;
+float MUTATION_RATE = 0.001;
+ArrayList<Check> checks;
+
+void setup(){
+  noStroke();
+  size(500, 500);
+//  size((int)(CHECK_SIZE * CHECK_WIDTH), (int)(CHECK_SIZE * CHECK_WIDTH));
+  smooth();
+  frameRate(40);
+
+  checks = new ArrayList<Check>();
+  for(int i = 0; i < CHECKS_SIZE; i++){
+    checks.add(new Check());
+  }
+}
+
+void draw(){
+  Check best = checks.get(0);
+  int bestScore = 0;
+  for(int i = 0; i < CHECKS_SIZE; i++){
+    int score = checks.get(i).getScore();
+    if(score > bestScore){
+      best = checks.get(i);
+      bestScore = score;
+    }
+  }
+
+  best.draw();
+  
+  ArrayList<Check> newChecks = new ArrayList<Check>();
+  for(int i = 0; i < CHECKS_SIZE; i++){
+    newChecks.add(new Check(best));
+  }  
+  checks = newChecks;
+}
+
+class Check{
+  
+  boolean[][] pattern;
+  
+  Check(){
+    pattern = new boolean[CHECK_WIDTH][CHECK_WIDTH];
+    for(int h = 0; h < CHECK_WIDTH; h++){
+      for(int w = 0; w < CHECK_WIDTH; w++){
+        pattern[h][w] = random(1) < 0.5 ? true: false;
+      }
+    }
+  }
+  
+  Check(Check check){
+    pattern = new boolean[CHECK_WIDTH][CHECK_WIDTH];
+    for(int h = 0; h < CHECK_WIDTH; h++){
+      for(int w = 0; w < CHECK_WIDTH; w++){
+        if(random(1) < MUTATION_RATE){
+          pattern[h][w] = random(1) < 0.5 ? true: false;
+        } else {
+          pattern[h][w] = check.pattern[h][w];
+        }
+      }
+    }
+  }
+  
+  void draw(){
+    for(int h = 0; h < CHECK_WIDTH; h++){
+      for(int w = 0; w < CHECK_WIDTH; w++){
+        if(pattern[h][w]){
+          fill(0);
+        } else {
+          fill(255);
+        }
+        rect(w * CHECK_SIZE, h * CHECK_SIZE, CHECK_SIZE, CHECK_SIZE);
+      }
+    } 
+  }
+  
+  int getScore(){
+    int score = 0;
+    for(int h = 0; h < CHECK_WIDTH; h++){
+      for(int w = 0; w < CHECK_WIDTH; w++){
+        if(pattern[h][w] == ((h + w) % 2 == 0)){
+          score += 1;
+        }
+      }
+    }
+    return score;
+  }
+}
