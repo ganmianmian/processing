@@ -1,0 +1,235 @@
+ColorButton blackButton = new ColorButton("", 50, 100, 0, 0, 0);
+ColorButton greyButton = new ColorButton("", 50, 140, 128, 128, 128);
+ColorButton whiteButton = new ColorButton("", 50, 180, 255, 255, 255);
+ColorButton yellowButton = new ColorButton("", 50, 220, 255, 255, 0);
+ColorButton greenButton = new ColorButton("", 50, 260, 0, 128, 0);
+ColorButton lightblueButton = new ColorButton("", 50, 300, 0, 191, 255);
+ColorButton blueButton = new ColorButton("", 50, 340, 0, 0, 255);
+ColorButton redButton = new ColorButton("", 50, 380, 255, 0, 0);
+ColorButton pinkButton = new ColorButton("", 50, 420, 255, 0, 255);
+BrushButton brush1Button = new BrushButton(50, 481, 2);
+BrushButton brush2Button = new BrushButton(50, 496, 5);
+BrushButton brush3Button = new BrushButton(50, 516, 10);
+BrushButton brush4Button = new BrushButton(50, 539, 15);
+Button clearButton = new Button("清空", 125, 600);
+
+
+void setup()
+{ 
+  PFont myfont=createFont("宋体",50);
+  textSize(50);
+  textFont(myfont);
+  size(480, 640);
+  background(240);
+  fill(230);
+  stroke(210);
+  rect(30, 75, 40, 475, 90);
+  
+  fill(240);
+  stroke(210);
+  rect(215,15,80,20,10);
+
+
+  fill(0);
+  textAlign(CENTER);
+  textSize(20);
+  text("写字板", 258, 35);
+  stroke(150, 150, 150, 255);
+  fill(255);
+  rect(75, 50, 380, 540, 10);
+  drawAllButtons();
+  strokeWeight(2);
+}
+
+
+void draw() {
+}
+
+void mouseClicked() {
+  controls();
+}
+
+
+void mouseDragged() {
+
+  controls();
+
+  if ((mouseX > 86) && (mouseX < 445) && (mouseY > 60) && (mouseY < 575)) {
+    line(constrain(pmouseX, 86, 450), constrain(pmouseY, 60, 575), constrain(mouseX, 86, 450), constrain(mouseY, 60, 575));
+  }
+}
+
+
+
+void drawAllButtons() {
+  blackButton.drawButton();
+  greyButton.drawButton();
+  whiteButton.drawButton();
+  yellowButton.drawButton();
+  greenButton.drawButton();
+  lightblueButton.drawButton();
+  blueButton.drawButton();
+  redButton.drawButton();
+  pinkButton.drawButton();
+  clearButton.drawButton();
+  brush1Button.drawButton();
+  brush2Button.drawButton();
+  brush3Button.drawButton();
+  brush4Button.drawButton();
+}
+
+
+
+void controls() {
+  if ((mouseX > clearButton.xpos) &&
+    (mouseX < clearButton.xpos + 82) &&
+    (mouseY > clearButton.ypos) &&
+    (mouseY < clearButton.ypos + 27)) {
+    setup();
+  } else if ((mouseX > blackButton.xpos - (blackButton.buttonSize - 20))
+    && (mouseX < blackButton.xpos + (blackButton.buttonSize - 20)) 
+    && (mouseY > blackButton.ypos - (blackButton.buttonSize - 20)) 
+    && (mouseY < blackButton.ypos + (blackButton.buttonSize - 20))) {
+    blackButton.controls();
+  } else if ((mouseX > greyButton.xpos - (greyButton.buttonSize - 20))
+    && (mouseX < greyButton.xpos + (greyButton.buttonSize - 20)) 
+    && (mouseY > greyButton.ypos - (greyButton.buttonSize - 20)) 
+    && (mouseY < greyButton.ypos + (greyButton.buttonSize - 20))) {
+    greyButton.controls();
+  } else if ((mouseX > whiteButton.xpos - (whiteButton.buttonSize - 20))
+    && (mouseX < whiteButton.xpos + (whiteButton.buttonSize - 20)) 
+    && (mouseY > whiteButton.ypos - (whiteButton.buttonSize - 20)) 
+    && (mouseY < whiteButton.ypos + (whiteButton.buttonSize - 20))) {
+    whiteButton.controls();
+  } else if ((mouseX > yellowButton.xpos - (yellowButton.buttonSize - 20))
+    && (mouseX < yellowButton.xpos + (yellowButton.buttonSize - 20)) 
+    && (mouseY > yellowButton.ypos - (yellowButton.buttonSize - 20)) 
+    && (mouseY < yellowButton.ypos + (yellowButton.buttonSize - 20))) {
+    yellowButton.controls();
+  } else if ((mouseX > greenButton.xpos - (greenButton.buttonSize - 20))
+    && (mouseX < greenButton.xpos + (greenButton.buttonSize - 20)) 
+    && (mouseY > greenButton.ypos - (greenButton.buttonSize - 20)) 
+    && (mouseY < greenButton.ypos + (greenButton.buttonSize - 20))) {
+    greenButton.controls();
+  } else if ((mouseX > lightblueButton.xpos - (lightblueButton.buttonSize - 20))
+    && (mouseX < lightblueButton.xpos + (lightblueButton.buttonSize - 20)) 
+    && (mouseY > lightblueButton.ypos - (lightblueButton.buttonSize - 20)) 
+    && (mouseY < lightblueButton.ypos + (lightblueButton.buttonSize - 20))) {
+    lightblueButton.controls();
+  } else if ((mouseX > blueButton.xpos - (blueButton.buttonSize - 20))
+    && (mouseX < blueButton.xpos + (blueButton.buttonSize - 20)) 
+    && (mouseY > blueButton.ypos - (blueButton.buttonSize - 20)) 
+    && (mouseY < blueButton.ypos + (blueButton.buttonSize - 20))) {
+    blueButton.controls();
+  } else if ((mouseX > redButton.xpos - (redButton.buttonSize - 20)) 
+    && (mouseX < redButton.xpos + (redButton.buttonSize - 20)) 
+    && (mouseY > redButton.ypos - (redButton.buttonSize - 20)) 
+    && (mouseY < redButton.ypos + (redButton.buttonSize - 20))) {
+    redButton.controls();
+  } else if ((mouseX > pinkButton.xpos - (pinkButton.buttonSize - 20))
+    && (mouseX < pinkButton.xpos + (pinkButton.buttonSize - 20)) 
+    && (mouseY > pinkButton.ypos - (pinkButton.buttonSize - 20)) 
+    && (mouseY < pinkButton.ypos + (pinkButton.buttonSize - 20))) {
+    pinkButton.controls();
+  } else if ((mouseX > brush1Button.xpos - 10)
+    && (mouseX < brush1Button.xpos + 10) 
+    && (mouseY > brush1Button.ypos - 10) 
+    && (mouseY < brush1Button.ypos + 10)) {
+    brush1Button.controls();
+  } else if ((mouseX > brush2Button.xpos - 10)
+    && (mouseX < brush2Button.xpos + 10) 
+    && (mouseY > brush2Button.ypos - 10) 
+    && (mouseY < brush2Button.ypos + 10)) {
+    brush2Button.controls();
+  } else if ((mouseX > brush3Button.xpos - 10)
+    && (mouseX < brush3Button.xpos + 10) 
+    && (mouseY > brush3Button.ypos - 10) 
+    && (mouseY < brush3Button.ypos + 10)) {
+    brush3Button.controls();
+  } else if ((mouseX > brush4Button.xpos - 10)
+    && (mouseX < brush4Button.xpos + 10) 
+    && (mouseY > brush4Button.ypos - 10) 
+    && (mouseY < brush4Button.ypos + 10)) {
+    brush4Button.controls();
+  }
+}
+
+
+
+class BrushButton {
+  int xpos, ypos, buttonSize;
+  BrushButton(int x, int y, int bs) {
+    xpos = x;
+    ypos = y;
+    buttonSize = bs;
+  }
+  void drawButton() {
+    fill(0);
+    ellipse(this.xpos, this.ypos, this.buttonSize, this.buttonSize);
+  }
+  void controls() {
+    strokeWeight(this.buttonSize);
+  }
+}
+
+
+
+class Button {
+  String buttonText;
+  float xpos, ypos;
+
+  Button(String str, float x, float y) {
+    buttonText = str;
+    xpos = x;
+    ypos = y;
+  }
+  
+
+  void drawButton() {    
+    fill(200);
+    rect(this.xpos, this.ypos, 80, 25,45);
+    fill(0);
+    textSize(12);
+    textAlign(CENTER);
+    text(buttonText, xpos + 38, ypos + 17);
+  }
+}
+
+
+class ColorButton {
+  String buttonText;
+  int xpos, ypos, red, green, blue, buttonSize;
+  ColorButton(String str, int x, int y, int r, int g, int b) {
+    buttonText = str;
+    xpos = x;
+    ypos = y;
+    red = r;
+    green = g;
+    blue = b;
+    buttonSize = 30;
+  }
+
+
+
+  void drawButton() {
+    strokeWeight(1);
+
+    if ((this.red == 255) && (this.green == 255) && (this.blue == 255)) {
+      stroke(0, 0, 0, 200);
+    } else {
+      stroke(this.red, this.green, this.blue, 100);
+    }
+    fill(this.red, this.green, this.blue);
+    ellipse(this.xpos, this.ypos, buttonSize, buttonSize);
+    fill(0, 0, 0);
+    textSize(12);
+    textAlign(LEFT);
+    text(buttonText, this.xpos + 50, this.ypos);
+  }
+
+
+
+  void controls() {
+    stroke(this.red, this.green, this.blue);
+  }
+}
